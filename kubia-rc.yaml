@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: kubia-rc
+spec:
+  replicas: 3
+  selector:  # If not specified, it will be configured automatically from the pod template labels
+    app: kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          image: mattogodoy/kubia:arm
+          ports:
+            - containerPort: 8080

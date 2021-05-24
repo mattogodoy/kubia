@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: kubia-rs
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - key: app
+        operator: In
+        values:
+          - kubia
+  template:
+    metadata:
+      labels:
+        app: kubia
+    spec:
+      containers:
+        - name: kubia
+          # image: mattogodoy/kubia:latest  # For x86
+          image: mattogodoy/kubia:arm  # For arm (raspberry)
+          readinessProbe:
+            exec:
+              command:
+              - ls
+              - /var/ready
+          ports:
+            - containerPort: 8080

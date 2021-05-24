@@ -1,0 +1,11 @@
+# Allows you to specify the endpoints manually (by not specifying a selector).
+# Useful for pointing to stuff outside the cluster.
+# This goes with the Endpoints resource (file kubia-external-svc-endpoints.yaml)
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-external-svc
+spec:
+  ports:
+  - port: 80

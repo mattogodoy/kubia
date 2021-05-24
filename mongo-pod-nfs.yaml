@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb
+spec:
+  # securityContext:
+  #   runAsUser: 1100
+  #   fsGroup: 1100
+  volumes:
+  - name: mongodb-data
+    nfs:
+      server: 192.168.4.10
+      path: /mnt/usb/ssd/donatello/mongo
+  containers:
+  - image: andresvidal/rpi3-mongodb3
+    name: mongodb
+    volumeMounts:
+    - name: mongodb-data  # Same name as the defined volume in line 7
+      mountPath: /data/db
+    ports:
+    - containerPort: 27017
+      protocol: TCP

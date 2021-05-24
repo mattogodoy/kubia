@@ -1,0 +1,13 @@
+# Allows you to specify the endpoints manually (by not specifying a selector).
+# Useful for pointing to stuff outside the cluster by URL. For example, an API
+# Does not need the Endpoints file.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubia-external-svc
+spec:
+  type: externalName
+  externalName: someapi.somecompany.com
+  ports:
+  - port: 80
